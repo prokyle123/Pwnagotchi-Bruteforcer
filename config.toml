@@ -1,1 +1,56 @@
+# BruteForcer plugin
 main.plugins.bruteforce.enabled = true
+
+# --- Paths ---
+# Folder where your .pcap handshakes are stored
+main.plugins.bruteforce.handshake_dir = "/home/pi/handshakes"
+
+# Folder containing your base wordlists
+main.plugins.bruteforce.wordlist_folder = "/home/pi/wordlists"
+
+# Persistent stats / progress file
+main.plugins.bruteforce.progress_file = "/root/bruteforce_progress.json"
+
+# Env favorites file (auto-built from cracked keys)
+main.plugins.bruteforce.env_favorites_path = "/tmp/bruteforce_env_favorites.txt"
+main.plugins.bruteforce.env_favorites_max = 1000
+
+# --- Engine behavior ---
+# Seconds to wait between handshakes
+main.plugins.bruteforce.delay_between_attempts = 5
+
+# How many times to retry a timeout on the same capture
+main.plugins.bruteforce.retry_limit = 3
+
+# Flask dashboard port -> http://<pwnagotchi-ip>:5000
+main.plugins.bruteforce.dashboard_port = 5000
+
+# --- Mutator core options ---
+main.plugins.bruteforce.mutator_enabled = true
+# "fast", "balanced", or "heavy"
+main.plugins.bruteforce.mutator_profile = "balanced"
+# Max generated words per SSID (safe range: 10–20000)
+main.plugins.bruteforce.mutator_max_words = 800
+
+# --- Mutator feature toggles ---
+main.plugins.bruteforce.mutator_include_base64 = true
+main.plugins.bruteforce.mutator_include_years = true
+# "off", "light", or "heavy"
+main.plugins.bruteforce.mutator_leet_mode = "light"
+
+main.plugins.bruteforce.mutator_include_rot13 = true
+main.plugins.bruteforce.mutator_include_hex = false
+main.plugins.bruteforce.mutator_include_separators = true
+main.plugins.bruteforce.mutator_include_reversed = true
+main.plugins.bruteforce.mutator_include_case_swaps = true
+main.plugins.bruteforce.mutator_use_env_favorites = true
+main.plugins.bruteforce.mutator_ssid_splits = true
+
+# Extra seed words the mutator can mix with SSIDs
+main.plugins.bruteforce.mutator_custom_words = [
+  "wifi",
+  "home",
+  "internet",
+  "password",
+  "router"
+]
