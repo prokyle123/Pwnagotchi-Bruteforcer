@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="assets/live-performance-snapshot.png" alt="Live Pwnagotchi BruteForcer performance snapshot showing processed captures, throughput, and job telemetry" width="100%">
+  <img src="https://github.com/user-attachments/assets/181039b1-a4d6-4a83-9796-369bf689b8c5" alt="Pwnagotchi BruteForcer e-paper status display" width="100%">
 </p>
 
 <h1 align="center">Pwnagotchi BruteForcer</h1>
 
 <p align="center">
-  <strong>Turn a Pwnagotchi into a local Command Center for capture triage, queue control, throughput telemetry, and job history.</strong>
+  <strong>Turn a Pwnagotchi into a local Command Center for capture triage, queue control, measured throughput, thermal awareness, and explainable job history.</strong>
 </p>
 
 <p align="center">
@@ -15,19 +15,17 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-193b5c?style=for-the-badge" alt="GPL-3.0 license"></a>
 </p>
 
-> **Authorized-use only.** This project is for recovery testing, security assessment, and lab work involving wireless networks and capture files you own or have explicit permission to assess. Do not use it on networks or credentials you are not authorized to test.
+> **Authorized-use only.** BruteForcer is for recovery testing, security assessment, and lab work involving wireless networks and capture files you own or have explicit permission to assess. Do not use it on networks or credentials you are not authorized to test.
 
-## Not another “set it and forget it” plugin
+## A Pwnagotchi plugin that feels like a small appliance
 
 BruteForcer gives a Pwnagotchi a real local control panel instead of leaving you with a pile of captures, terminal output, and guesswork.
-
-It watches your capture directory, processes one queued job at a time, records what happened, and puts the useful stuff on one dashboard:
 
 ```text
 capture triage → queue decision → active job → measured performance → job history
 ```
 
-The Command Center is served locally at:
+It watches the configured capture directory, processes one queued job at a time, records what happened, and puts the useful stuff on one dashboard.
 
 ```text
 http://<your-pwnagotchi-ip>:5000/
@@ -35,48 +33,39 @@ http://<your-pwnagotchi-ip>:5000/
 
 No cloud dashboard. No account. No extra machine required for the local view.
 
-## Live snapshot
+## Real dashboard screenshots
 
-The image at the top is a real Pi run. It shows the performance panel with processed captures, measured words per second, workload progress, and current job duration.
+These are live screenshots from the project running on a Pi. Network names, capture filenames, identifiers, keys, and other local details are intentionally redacted before publishing.
 
-The project also includes richer pages for queue control, capture triage, reporting, and Mutator Lab inspection.
+### Command Center — live job, queue, health, and results
 
-## Dashboard tour
+<p align="center">
+  <a href="assets/screenshots/command-center-gallery.png">
+    <img src="assets/screenshots/command-center-gallery.png" alt="Redacted live Command Center dashboard screenshots" width="100%">
+  </a>
+</p>
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>Command Center</h3>
-      <img src="assets/command-center-overview.svg" alt="Representative Command Center overview" width="100%">
-      <p>See the active job, queue, current throughput, system health, fan telemetry, progress history, and quick job actions without hunting through logs.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>Capture Library</h3>
-      <img src="assets/capture-library.svg" alt="Representative Capture Library page" width="100%">
-      <p>Grade captures, spot duplicates, understand queue priority, and decide whether to requeue, defer, review, or mark a bad capture.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>Mutator Lab</h3>
-      <img src="assets/mutator-lab.svg" alt="Representative Mutator Lab page" width="100%">
-      <p>Inspect the active candidate budget, enabled features, candidate-family mix, recent builds, and estimated workload before it consumes Pi time.</p>
-    </td>
-    <td width="50%" valign="top">
-      <h3>Built for the Pi you actually have</h3>
-      <p>BruteForcer keeps the workflow practical for a small Pwnagotchi build:</p>
-      <ul>
-        <li>One job at a time instead of competing processes.</li>
-        <li>Temperature, RAM, swap, load, and fan RPM visible in the same place.</li>
-        <li>Measured throughput instead of blindly trusting terminal redraw text.</li>
-        <li>Persistent state and job history so a reboot does not turn into a mystery.</li>
-      </ul>
-      <p><strong>It is meant to feel like a little appliance, not an unfinished script.</strong></p>
-    </td>
-  </tr>
-</table>
+The Command Center puts the active job, progress, queue controls, measured words per second, system health, fan telemetry, wordlist effectiveness, activity timeline, and plugin logs in one local page.
 
-> The Command Center layout and data can vary slightly by device, plugin options, and release version. The preview panels above reflect the features included in the v3.3.0 release.
+### Intelligence — capture quality, queue reasoning, and history
+
+<p align="center">
+  <a href="assets/screenshots/intelligence-gallery.png">
+    <img src="assets/screenshots/intelligence-gallery.png" alt="Redacted live Intelligence dashboard screenshots" width="100%">
+  </a>
+</p>
+
+The Intelligence page adds capture grades, duplicate grouping, adaptive queue visibility, heat/RAM/swap/load history, a decision timeline, wordlist analytics, and an at-a-glance view of what the system is doing.
+
+### Mutator Lab — transparent settings and workload visibility
+
+<p align="center">
+  <a href="assets/screenshots/mutator-lab.png">
+    <img src="assets/screenshots/mutator-lab.png" alt="Redacted live Mutator Lab dashboard screenshot" width="100%">
+  </a>
+</p>
+
+Instead of a black box, Mutator Lab exposes the active strategy, candidate cap, candidate-family mix, estimated pass time, recent builds, and exactly which options are enabled.
 
 ## What makes it different
 
@@ -87,14 +76,14 @@ The project also includes richer pages for queue control, capture triage, report
 | Wondering whether the Pi is cooking itself | CPU temperature, RAM, swap, load, PWM fan percentage, and tachometer RPM in the dashboard |
 | Rerunning the same capture blindly | Persistent job history, capture status, retry tracking, and queue controls |
 | A giant mystery candidate list | A capped Mutator Lab with strategy, enabled features, candidate-family mix, build history, and estimated workload |
-| Losing context after a crash or reboot | An active-job journal and persistent state that help make interrupted work explainable |
+| Losing context after a crash or reboot | An active-job journal and persistent state that make interrupted work explainable |
 
 ## Main features
 
 ### Command Center
 
 - Local Flask dashboard on port `5000`
-- Active SSID, capture, wordlist stage, retry state, and progress
+- Active capture, wordlist stage, retry state, and progress
 - Queue controls: pause, resume, skip, defer, requeue, and mark a capture bad
 - Recent activity log and job timeline
 - Current, recent-average, and completed-job throughput metrics
@@ -160,7 +149,7 @@ Use the full device install and upgrade notes here:
 ```text
 Bruteforcer.py                    # Main custom plugin
 config.example.toml               # Example configuration
-assets/                           # README screenshots and dashboard previews
+assets/screenshots/               # Redacted live dashboard screenshots
 docs/                             # Upgrade, verification, and GitHub notes
 extras/fan_control_telemetry.py  # Optional fan telemetry companion
 CHANGELOG.md                      # Release history
