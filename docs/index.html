@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Pwnagotchi BruteForcer is a local command center for authorized wireless-capture triage, queue control, performance visibility, thermal awareness, and job history." />
+  <title>Pwnagotchi BruteForcer</title>
+  <style>
+    :root {
+      --bg:#071014; --panel:#0d1b20; --panel2:#11272e; --text:#edfdf8; --muted:#a6c3bd;
+      --line:rgba(154,220,204,.16); --mint:#55dfb6; --cyan:#53bae7; --lime:#a3df69; --amber:#ffc66d; --max:1160px;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--text);background:radial-gradient(circle at 15% 0%,rgba(83,186,231,.18),transparent 31rem),radial-gradient(circle at 87% 16%,rgba(85,223,182,.15),transparent 29rem),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+    a{color:inherit;text-decoration:none}.wrap{width:min(calc(100% - 36px),var(--max));margin:0 auto}nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:-.025em}.mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--mint));box-shadow:0 12px 28px rgba(61,205,176,.22);font-weight:950;color:#04221c}.navlinks{display:flex;align-items:center;gap:20px;color:var(--muted);font-size:.93rem}.navlinks a:hover{color:var(--text)}.mini,.button{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:12px;font-weight:760;transition:transform .16s ease,border-color .16s ease}.mini{padding:9px 13px;border:1px solid rgba(123,228,201,.35);color:var(--text)}.button{padding:13px 18px;border:1px solid transparent}.mini:hover,.button:hover{transform:translateY(-2px)}.primary{background:linear-gradient(135deg,var(--cyan),var(--mint));color:#03231c;box-shadow:0 16px 33px rgba(65,210,180,.2)}.secondary{border-color:rgba(123,228,201,.33);background:rgba(11,29,34,.72)}
+    .hero{padding:90px 0 53px;display:grid;grid-template-columns:1.03fr .97fr;gap:46px;align-items:center}.eyebrow{color:#bfeee2;font-size:.78rem;letter-spacing:.145em;font-weight:850;text-transform:uppercase}.hero h1{font-size:clamp(2.7rem,6vw,5.25rem);line-height:.98;letter-spacing:-.066em;margin:15px 0 22px}.hero h1 span{color:#aef0d7}.lead{max-width:660px;color:var(--muted);font-size:clamp(1.05rem,2vw,1.21rem)}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}.badge{border:1px solid var(--line);background:rgba(11,29,34,.7);color:#c9e6df;padding:8px 11px;border-radius:999px;font-size:.85rem}.shot{position:relative}.shot:before{content:"";position:absolute;inset:9% -5% -5% 7%;background:linear-gradient(135deg,rgba(83,186,231,.34),rgba(85,223,182,.28));filter:blur(63px);z-index:-1}.image{display:block;width:100%;border-radius:20px;border:1px solid rgba(156,236,209,.25);box-shadow:0 34px 76px rgba(0,0,0,.44);background:#102026}
+    section{padding:55px 0}.section-title{max-width:750px}h2{margin:0;font-size:clamp(1.9rem,3vw,3rem);line-height:1.08;letter-spacing:-.047em}.copy{color:var(--muted);font-size:1.05rem;margin-top:14px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:30px}.stat,.card,.step{background:linear-gradient(155deg,rgba(19,47,54,.9),rgba(8,22,27,.83));border:1px solid var(--line);border-radius:18px}.stat{padding:23px}.stat strong{display:block;font-size:1.3rem;letter-spacing:-.03em}.stat span{color:var(--muted);font-size:.92rem}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:27px}.card{padding:23px;min-height:185px}.icon{width:43px;height:43px;display:grid;place-items:center;border-radius:12px;background:rgba(85,223,182,.14);color:#b9f5df;font-size:1.2rem}.card h3{margin:16px 0 8px;font-size:1.07rem;letter-spacing:-.02em}.card p{margin:0;color:var(--muted);font-size:.95rem}.workflow{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-top:28px}.step{padding:20px;position:relative}.step:not(:last-child):after{content:"→";position:absolute;right:-16px;top:50%;transform:translateY(-50%);color:#a8efe0;font-size:1.25rem;z-index:2}.no{color:#b3eedf;font-size:.78rem;font-weight:850;letter-spacing:.1em}.step strong{display:block;margin-top:8px;font-size:1.04rem}.step span{display:block;margin-top:7px;color:var(--muted);font-size:.89rem}.split{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}.check{padding:0;margin:0;list-style:none}.check li{position:relative;padding:12px 0 12px 29px;color:var(--muted);border-bottom:1px solid var(--line)}.check li:last-child{border-bottom:0}.check li:before{content:"✓";position:absolute;left:0;color:var(--mint);font-weight:900}.notice{margin-top:24px;padding:20px;border-left:3px solid var(--amber);border-radius:0 14px 14px 0;background:rgba(255,198,109,.08);color:#ffe5b2}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}.gallery figure{margin:0}.gallery img{display:block;width:100%;border-radius:17px;border:1px solid var(--line);box-shadow:0 23px 50px rgba(0,0,0,.28)}.gallery figcaption{color:var(--muted);font-size:.9rem;margin:8px 3px 0}.cta{margin-top:28px;padding:clamp(27px,5vw,54px);border-radius:22px;border:1px solid rgba(124,238,205,.29);background:linear-gradient(135deg,rgba(45,132,129,.32),rgba(40,103,138,.27));text-align:center}.cta h2{max-width:700px;margin:0 auto}.cta p{color:#d2eee7;max-width:690px;margin:14px auto 24px}footer{margin-top:52px;border-top:1px solid var(--line);padding:28px 0 42px;color:#86a9a1;font-size:.88rem}.foot{display:flex;justify-content:space-between;align-items:center;gap:16px}
+    @media(max-width:900px){.hero,.split{grid-template-columns:1fr}.hero{padding-top:62px}.workflow{grid-template-columns:repeat(3,1fr)}.step:nth-child(3):after{display:none}.grid3{grid-template-columns:1fr 1fr}}@media(max-width:620px){.navlinks a{display:none}.stats,.grid3,.workflow,.gallery{grid-template-columns:1fr}.step:after{display:none}.actions{display:block}.actions .button{width:100%;margin-bottom:10px}.foot{align-items:flex-start;flex-direction:column}nav{height:66px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top"><span class="mark">B</span><span>Pwnagotchi BruteForcer</span></a>
+      <div class="navlinks"><a href="#features">Features</a><a href="#workflow">Workflow</a><a href="#screens">Screens</a><a class="mini" href="https://github.com/prokyle123/Pwnagotchi-Bruteforcer">View on GitHub ↗</a></div>
+    </nav>
+    <main id="top">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Authorized lab and recovery workflows</div>
+          <h1>Give your <span>Pwnagotchi</span> a real command center.</h1>
+          <p class="lead">A local dashboard for authorized capture triage, queue control, measured throughput, device health, fan telemetry, and job history—built to replace terminal guesswork with a clear, explainable workflow.</p>
+          <div class="actions"><a class="button primary" href="https://github.com/prokyle123/Pwnagotchi-Bruteforcer">Open the repository ↗</a><a class="button secondary" href="https://github.com/prokyle123/Pwnagotchi-Bruteforcer#quick-start">Read quick start</a></div>
+          <div class="badges"><span class="badge">Pwnagotchi plugin</span><span class="badge">Raspberry Pi</span><span class="badge">Local Flask dashboard</span><span class="badge">Thermal aware</span><span class="badge">GPL-3.0</span></div>
+        </div>
+        <div class="shot"><img class="image" src="../assets/screenshots/command-center-gallery.png" alt="Redacted Pwnagotchi BruteForcer Command Center dashboard screenshots" /></div>
+      </section>
+
+      <section>
+        <div class="section-title"><div class="eyebrow">A small appliance, not a pile of terminal windows</div><h2>Make authorized capture review organized, measurable, and easier to explain.</h2><p class="copy">BruteForcer watches a configured capture directory, handles one queued job at a time, keeps a persistent record of what happened, and brings operational visibility into one local web interface.</p></div>
+        <div class="stats"><div class="stat"><strong>Capture triage</strong><span>Grade, group duplicates, and see why a job was queued or deferred.</span></div><div class="stat"><strong>Measured performance</strong><span>Track tested-key counters and elapsed time instead of relying only on terminal output.</span></div><div class="stat"><strong>Device awareness</strong><span>Keep CPU temperature, RAM, swap, load, and fan telemetry visible beside the workload.</span></div></div>
+      </section>
+
+      <section id="features">
+        <div class="section-title"><div class="eyebrow">Core capabilities</div><h2>Designed for visibility at every stage of an authorized workflow.</h2></div>
+        <div class="grid3">
+          <article class="card"><div class="icon">▣</div><h3>Command Center</h3><p>See the active job, queue, retry state, activity timeline, current throughput, recent averages, and completed-job performance from one page.</p></article>
+          <article class="card"><div class="icon">⌁</div><h3>Capture Intelligence</h3><p>Use quality grades, plain-English queue reasons, duplicate grouping, review filters, per-capture history, and separate reports pages.</p></article>
+          <article class="card"><div class="icon">◌</div><h3>System health</h3><p>Surface CPU temperature, RAM, swap, load average, and optional PWM/RPM fan telemetry alongside the active workload.</p></article>
+          <article class="card"><div class="icon">≋</div><h3>Mutator Lab</h3><p>Expose strategy and workload settings with candidate caps, candidate-family breakdowns, build history, and estimated pass duration.</p></article>
+          <article class="card"><div class="icon">↻</div><h3>Recovery-aware state</h3><p>Keep persistent progress, retries, job history, and an active-job journal so interruptions are easier to understand after a crash or reboot.</p></article>
+          <article class="card"><div class="icon">⌗</div><h3>Reports and exports</h3><p>Review per-SSID history, wordlist effectiveness, and exportable summaries for authorized testing records and lab documentation.</p></article>
+        </div>
+      </section>
+
+      <section id="workflow">
+        <div class="section-title"><div class="eyebrow">Workflow</div><h2>From capture triage to an explainable job history.</h2></div>
+        <div class="workflow">
+          <div class="step"><span class="no">01</span><strong>Capture intake</strong><span>New authorized capture files appear in the configured directory.</span></div>
+          <div class="step"><span class="no">02</span><strong>Triage</strong><span>Quality grades and duplicate grouping help prioritize what to review.</span></div>
+          <div class="step"><span class="no">03</span><strong>Queue control</strong><span>Pause, resume, defer, requeue, skip, or mark review outcomes locally.</span></div>
+          <div class="step"><span class="no">04</span><strong>Measured run</strong><span>Track progress, performance, thermals, and system health as the job proceeds.</span></div>
+          <div class="step"><span class="no">05</span><strong>History + reports</strong><span>Keep clear outcomes, retry state, and reporting context after the work ends.</span></div>
+        </div>
+      </section>
+
+      <section id="screens">
+        <div class="section-title"><div class="eyebrow">Real redacted project screens</div><h2>A dashboard designed to answer “what is it doing?” at a glance.</h2><p class="copy">The images below are from the running project. Network names, capture names, identifiers, keys, and other local details were redacted before publishing.</p></div>
+        <div class="gallery">
+          <figure><img src="../assets/screenshots/intelligence-gallery.png" alt="Redacted Capture Intelligence dashboard screenshots"/><figcaption>Capture Intelligence: quality, duplicate groups, queue reasoning, health history, and activity timeline.</figcaption></figure>
+          <figure><img src="../assets/screenshots/mutator-lab.png" alt="Redacted Mutator Lab dashboard screenshot"/><figcaption>Mutator Lab: transparent workload settings, enabled options, candidate mix, and time estimates.</figcaption></figure>
+        </div>
+      </section>
+
+      <section>
+        <div class="split"><div><div class="eyebrow">Local, focused, explainable</div><h2>No cloud account. No mystery status. No hidden workload settings.</h2><p class="copy">The local interface runs on the Pwnagotchi and is intended for lab, recovery, and security-assessment environments where you own the networks and captures—or have explicit written authorization to assess them.</p><div class="actions"><a class="button secondary" href="https://github.com/prokyle123/Pwnagotchi-Bruteforcer/blob/main/docs/UPGRADING.md">Read install and upgrade notes</a></div></div><div class="card"><h3>What this project focuses on</h3><ul class="check"><li>Authorized capture-file triage and local queue management.</li><li>Transparent device performance and thermal visibility.</li><li>Persistent, explainable job state and reports.</li><li>Safer lab operations through clear controls and audit context.</li><li>Redacted public documentation and responsible sharing.</li></ul></div></div>
+        <div class="notice"><strong>Authorized use only:</strong> Use BruteForcer only with wireless networks, capture files, and credentials you own or have explicit permission to assess. This project is for recovery testing, security assessment, and controlled lab work—not unauthorized access.</div>
+      </section>
+
+      <section>
+        <div class="cta"><div class="eyebrow">Open-source Pwnagotchi project</div><h2>Build a more visible, dependable local workflow for your own wireless-security lab.</h2><p>Read the source, check the v3.3.0 changelog, use the setup guides, and see the project’s redacted live screenshots on GitHub.</p><div class="actions" style="justify-content:center"><a class="button primary" href="https://github.com/prokyle123/Pwnagotchi-Bruteforcer">View Pwnagotchi BruteForcer ↗</a></div></div>
+      </section>
+    </main>
+    <footer><div class="foot"><span>Pwnagotchi BruteForcer · local command center for authorized wireless-security lab workflows</span><span><a href="https://github.com/prokyle123/Pwnagotchi-Bruteforcer">GitHub</a> · <a href="https://github.com/prokyle123/Pwnagotchi-Bruteforcer/blob/main/LICENSE">GPL-3.0</a></span></div></footer>
+  </div>
+</body>
+</html>
