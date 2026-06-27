@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.swp
+*.swo
+.DS_Store
+*.bak
+*.backup
+*.log
+bruteforce_progress.json
+fan_status.json

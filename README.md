@@ -1,71 +1,103 @@
-![Screenshot 2024-10-07 210129](https://github.com/user-attachments/assets/181039b1-a4d6-4a83-9796-369bf689b8c5)
-The BruteForcer Plugin is a powerful tool designed for penetration testers, security researchers, and Wi-Fi enthusiasts who want to automate WPA/WPA2 handshake cracking using aircrack-ng. This plugin seamlessly integrates with Pwnagotchi, allowing users to monitor and brute force captured handshakes in real-time, while offering detailed feedback and intuitive UI integration to optimize the process.
+# Pwnagotchi BruteForcer
 
-🔑 Key Features
-1. Real-Time Brute Force Progress
-The BruteForcer Plugin provides real-time progress updates directly from aircrack-ng. You’ll see detailed status updates that include the current progress percentage during brute force attacks.
-The Progress field (PR) dynamically updates throughout the attack, ensuring you can monitor how far along the brute force process is, providing greater visibility into long-running wordlist attacks.
-2. Intuitive and Compact UI Integration
-The plugin adds small, neatly formatted status messages to the bottom of your Pwnagotchi’s screen. These messages display the current SSID (abbreviated for space), the wordlist being used, and the current WPS (Words per Second).
-The UI has been designed to make optimal use of limited screen space, providing you with the most essential information without overwhelming the display.
-You’ll know at a glance which network is being attacked, which wordlist is in use, and how fast the brute force attack is progressing.
-2.5 :) Flask Web Dashboard
-The plugin starts a Flask web server running on port 5000 that displays real-time status updates via a web-based dashboard.
-The dashboard provides an overview of the current attack, including the network SSID, wordlist in use, total handshakes processed, progress, and brute force results.
-Accessible at http://<your-pwnagotchi-ip>:5000, this feature lets you monitor the status of ongoing brute force attempts remotely.
-3. Single-Instance Brute Forcing
-To prevent resource conflicts and ensure maximum stability, BruteForcer only runs one brute force attack at a time. This ensures that each handshake is attacked individually and prevents multiple attacks from overlapping.
-This approach guarantees that your Pwnagotchi operates efficiently, focusing its resources on one task at a time, making it easier to track individual progress and results.
-4. Automatic Retry on Failures
-The plugin has built-in error handling and automatic retries. If a brute force attack times out or fails (e.g., due to an incomplete handshake), the plugin will automatically retry the attack up to three times.
-This feature is particularly useful when dealing with challenging or incomplete handshakes, ensuring the highest possible success rate without manual intervention.
-5. Detailed Logging and Debugging
-BruteForcer logs every step of the brute force process, from the initial command to the final result, making it easy to review what’s happening under the hood.
-The plugin logs real-time progress, detailed errors, and results from each attack, including whether a password was cracked or the attack failed. This allows for easier troubleshooting and fine-tuning of your approach to specific networks.
-6. Flexible Wordlist Management
-BruteForcer supports multiple wordlists, giving users the flexibility to use their favorite wordlists or cycle through multiple lists during brute force attacks.
-Wordlists can be placed in a designated folder, and the plugin will automatically iterate through them during each attack, maximizing the chances of cracking the handshake.
-You can easily update or swap out wordlists without changing the core configuration.
-7. Optimized Handshake File Handling
-The plugin efficiently monitors your handshake directory, ensuring that each .pcap file is processed and that no handshake is missed.
-It tracks which handshakes have been processed, making sure that files are not brute forced multiple times unnecessarily, while providing clear feedback on how many files have been processed versus how many remain.
-8. WPA/WPA2 Handshake Support
-The BruteForcer Plugin is tailored for WPA/WPA2 security, focusing on capturing and cracking standard WPA handshakes. It supports .pcap files that contain the necessary EAPOL data for cracking WPA/WPA2 networks.
-💡 How It Works
-Monitor Directory for Handshake Files:
+> **Authorized-use only.** BruteForcer is intended for recovery tests, security assessments, and lab work involving Wi-Fi networks and captures you own or have explicit permission to test. Do not use it on networks or credentials you are not authorized to assess.
 
-BruteForcer continuously monitors a designated directory for any new .pcap files (handshake captures). Once a new file is detected, the plugin automatically starts processing the file using the provided wordlists.
-Initiate Brute Force Attack:
+BruteForcer is a Pwnagotchi custom plugin that monitors a capture directory, processes WPA/WPA2 capture files with `aircrack-ng`, and provides a local, offline-friendly Command Center dashboard. Version 3.3.0 expands the original single-job workflow with capture intelligence, resource telemetry, fan status support, measured throughput reporting, queue controls, and a Mutator Lab.
 
-The plugin runs aircrack-ng in the background to brute force the WPA/WPA2 handshakes using the selected wordlist(s). You can configure the wordlist folder to contain multiple wordlists, which the plugin will iterate over.
-Real-Time Progress Updates:
+## What v3.3.0 adds
 
-The plugin displays real-time updates of the brute force attack directly on the Pwnagotchi screen, showing the SSID being attacked, the wordlist in use, the progress percentage, and the WPS. These updates help you stay informed of the current attack’s progress without needing to check logs manually.
-Log Results and Errors:
+- One-job-at-a-time processing with retry tracking and persistent job history.
+- Local Flask Command Center at `http://<pwnagotchi-ip>:5000/`.
+- Capture Library, Intelligence, Reports, and Mutator Lab pages.
+- Capture quality grades, duplicate grouping, preflight checks, queue explanations, and optional adaptive ordering.
+- Measured candidates-per-second telemetry based on tested-key counters and elapsed time, with unverified terminal text clearly labeled separately.
+- Resource history for temperature, RAM, swap, load, WPS, and an optional runtime governor.
+- Fan telemetry support: CPU temperature in Fahrenheit, PWM percent, and tachometer RPM when the companion fan plugin is installed.
+- Crash-aware active-job journal, export endpoints, per-SSID history, per-wordlist analytics, and dashboard queue actions.
+- Smart, capped candidate generation with an inspectable Mutator Lab and a Pi-friendly `800` candidate example budget.
 
-Once a brute force attack completes (either successfully or unsuccessfully), the results are logged and displayed. The plugin will show whether the password was cracked, or if the attack failed, along with any relevant error messages.
-Handle Incomplete Handshakes:
+## Dashboard pages
 
-If a handshake file does not contain EAPOL frames or is otherwise incomplete, the plugin skips the file and logs an error, ensuring that processing continues smoothly without manual intervention.
-📋 Requirements
-Pwnagotchi Device: This plugin is designed to run on Pwnagotchi devices with a display (e.g., e-paper, OLED) for real-time status updates.
-Aircrack-ng: aircrack-ng must be installed and properly configured on the device for the plugin to function. The plugin runs aircrack-ng in the background for each brute force attack.
-Captured Handshake Files: The plugin requires WPA/WPA2 handshake .pcap files to perform brute force attacks. These files can be captured using tools like airodump-ng, bettercap, or others.
-Wordlists: A wordlist or multiple wordlists for brute forcing. Place these in the configured wordlist directory, and the plugin will use them during attacks.
-🔧 Installation and Setup
-Install the Plugin:
+| Page | Purpose |
+|---|---|
+| `/` | Command Center: current job, queue, WPS, results, logs, system health, and fan telemetry. |
+| `/captures` | Searchable Capture Library with status, capture grade, duplicate grouping, priority, and requeue actions. |
+| `/intelligence` | Capture quality, queue reasoning, duplicate analysis, and resource trends. |
+| `/reports` | Daily and weekly activity summaries, wordlist effectiveness, and job outcomes. |
+| `/mutator` | Mutator strategy, cap usage, feature state, candidate-family mix, and recent build history. |
+| `/networks` | Per-SSID and wordlist performance history. |
 
-Copy the plugin files to your Pwnagotchi device in the appropriate plugin directory (/usr/local/share/pwnagotchi/custom-plugins/).
-Configure the Plugin:
+## Requirements
 
-Define the directories for your handshake files and wordlists in the plugin configuration. You can also configure the delay between brute force attempts and set your retry limits.
-Start the Plugin:
+- A supported Pwnagotchi image with custom-plugin loading enabled.
+- `aircrack-ng` installed on the Pwnagotchi.
+- Python 3, Flask, and the normal Pwnagotchi Python modules.
+- A configured capture directory and wordlist directory.
+- Optional: the companion fan plugin in `extras/fan_control_telemetry.py` plus `pigpiod` for PWM/RPM telemetry.
 
-Once installed, the plugin will automatically start monitoring for handshake files and will initiate brute force attacks as soon as a new file is detected.
-🎯 Who is This For?
-The BruteForcer Plugin is perfect for security professionals, Wi-Fi enthusiasts, and anyone looking to automate WPA/WPA2 handshake cracking. Whether you’re conducting penetration tests, performing security audits, or just experimenting with Pwnagotchi, this plugin allows you to easily monitor and crack handshakes in a streamlined, efficient way.
+## Install on the Pwnagotchi
 
-📈 Future Enhancements
-WPA3 Support: Future updates may include support for WPA3 handshakes as tools evolve to handle newer security protocols.
-Graphical Progress: Additional visual enhancements to show graphical representations of brute force progress.
-Advanced Error Handling: More granular error handling and recovery options for edge cases and complex handshake files.
+The device uses the filename **`Bruteforcer.py`** and the config prefix **`main.plugins.Bruteforcer.*`**. Keep that capitalization consistent.
+
+1. Back up the current plugin and stop Pwnagotchi:
+
+   ```bash
+   sudo systemctl stop pwnagotchi
+   sudo cp -a /usr/local/share/pwnagotchi/custom-plugins/Bruteforcer.py \
+     /usr/local/share/pwnagotchi/custom-plugins/Bruteforcer.py.backup-$(date +%Y%m%d-%H%M%S)
+   ```
+
+2. Copy or paste `Bruteforcer.py` to:
+
+   ```text
+   /usr/local/share/pwnagotchi/custom-plugins/Bruteforcer.py
+   ```
+
+3. Merge the relevant values from [`config.example.toml`](config.example.toml) into:
+
+   ```text
+   /etc/pwnagotchi/config.toml
+   ```
+
+   Do not add a second copy of an existing TOML key. Replace the existing setting instead.
+
+4. Verify syntax, then start the service:
+
+   ```bash
+   python3 -m py_compile /usr/local/share/pwnagotchi/custom-plugins/Bruteforcer.py
+   sudo systemctl start pwnagotchi
+   sudo systemctl status pwnagotchi --no-pager
+   ```
+
+No output from `py_compile` means the Python syntax check passed.
+
+For a detailed upgrade/rollback plan, read [`docs/UPGRADING.md`](docs/UPGRADING.md).
+
+## Configuration notes
+
+- `mutator_max_words = 800` is a practical starting point for a Pi-class device.
+- `smart` orders lower-noise candidate families early within the configured cap.
+- `adaptive_queue_enabled`, `dedupe_auto_skip`, and `epaper_status_mode` are off in the example so they do not unexpectedly change an established workflow.
+- The dashboard reads optional fan telemetry from `/var/tmp/pwnagotchi/fan_status.json`. Without the companion fan plugin it reports fan data as unavailable; the rest of BruteForcer still works.
+
+## Repository layout
+
+```text
+Bruteforcer.py                    Main Pwnagotchi custom plugin
+config.example.toml               Merge-only configuration example
+CHANGELOG.md                      Release history
+extras/fan_control_telemetry.py   Optional fan telemetry companion
+docs/UPGRADING.md                 Device upgrade and rollback guide
+docs/GITHUB_UPDATE.md             Publishing the release to GitHub
+```
+
+## Safety and data handling
+
+- Treat capture files, progress JSON, reports, and dashboard exports as sensitive.
+- Use restrictive permissions and keep backups off-device where possible.
+- The dashboard can display operational metadata and should be kept on a trusted local network.
+- The plugin is designed for authorized testing only; you are responsible for ensuring your use complies with applicable law and your testing authorization.
+
+## License
+
+GPL-3.0-or-later. See [`LICENSE`](LICENSE).

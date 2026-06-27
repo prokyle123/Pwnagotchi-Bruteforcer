@@ -1,0 +1,51 @@
+# Pwnagotchi BruteForcer v3.3.0 example configuration
+# Merge this block into /etc/pwnagotchi/config.toml.
+# Do not create duplicate keys: edit any setting you already have.
+# The filename and config prefix intentionally match: Bruteforcer.py / Bruteforcer.
+
+main.plugins.Bruteforcer.enabled = true
+main.plugins.Bruteforcer.handshake_dir = "/home/pi/handshakes"
+main.plugins.Bruteforcer.wordlist_folder = "/home/pi/wordlists"
+main.plugins.Bruteforcer.delay_between_attempts = 5
+main.plugins.Bruteforcer.dashboard_port = 5000
+
+# Keep the automatic candidate pass bounded on Pi-class hardware.
+main.plugins.Bruteforcer.mutator_enabled = true
+main.plugins.Bruteforcer.mutator_strategy = "smart"
+main.plugins.Bruteforcer.mutator_max_words = 800
+main.plugins.Bruteforcer.mutator_min_length = 8
+main.plugins.Bruteforcer.mutator_max_length = 63
+main.plugins.Bruteforcer.mutator_include_years = true
+main.plugins.Bruteforcer.mutator_year_start = 2020
+main.plugins.Bruteforcer.mutator_year_end = 0 # 0 means current year
+main.plugins.Bruteforcer.mutator_leet_mode = "light"
+main.plugins.Bruteforcer.mutator_include_separators = true
+main.plugins.Bruteforcer.mutator_ssid_splits = true
+main.plugins.Bruteforcer.mutator_include_token_pairs = true
+main.plugins.Bruteforcer.mutator_token_pair_limit = 6
+main.plugins.Bruteforcer.mutator_include_numeric_suffixes = true
+
+# Leave expensive transformations off for a normal Pi deployment.
+main.plugins.Bruteforcer.mutator_include_base64 = false
+main.plugins.Bruteforcer.mutator_include_rot13 = false
+main.plugins.Bruteforcer.mutator_include_hex = false
+main.plugins.Bruteforcer.mutator_include_reversed = false
+main.plugins.Bruteforcer.mutator_include_case_swaps = false
+main.plugins.Bruteforcer.mutator_use_env_favorites = false
+
+# Optional local seeds for networks you own or are explicitly authorized to test.
+main.plugins.Bruteforcer.mutator_custom_words = []
+main.plugins.Bruteforcer.mutator_custom_prefixes = []
+main.plugins.Bruteforcer.mutator_custom_suffixes = []
+main.plugins.Bruteforcer.mutator_preview_count = 12
+
+# Analytics and protection features. Queue behavior changes are opt-in.
+main.plugins.Bruteforcer.governor_enabled = true
+main.plugins.Bruteforcer.preflight_enabled = true
+main.plugins.Bruteforcer.adaptive_queue_enabled = false
+main.plugins.Bruteforcer.dedupe_auto_skip = false
+main.plugins.Bruteforcer.epaper_status_mode = false
+
+# Optional fan telemetry input. The companion fan plugin writes this status file.
+main.plugins.Bruteforcer.fan_status_path = "/var/tmp/pwnagotchi/fan_status.json"
+main.plugins.Bruteforcer.fan_status_stale_seconds = 20
