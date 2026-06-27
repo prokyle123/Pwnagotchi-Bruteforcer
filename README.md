@@ -1,3 +1,5 @@
+![Pwnagotchi BruteForcer Dashboard](https://github.com/user-attachments/assets/181039b1-a4d6-4a83-9796-369bf689b8c5)
+
 # Pwnagotchi BruteForcer
 
 > **Authorized-use only.** BruteForcer is intended for recovery tests, security assessments, and lab work involving Wi-Fi networks and captures you own or have explicit permission to test. Do not use it on networks or credentials you are not authorized to assess.
