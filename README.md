@@ -1,105 +1,187 @@
-![Pwnagotchi BruteForcer Dashboard](https://github.com/user-attachments/assets/181039b1-a4d6-4a83-9796-369bf689b8c5)
+<p align="center">
+  <img src="assets/live-performance-snapshot.png" alt="Live Pwnagotchi BruteForcer performance snapshot showing processed captures, throughput, and job telemetry" width="100%">
+</p>
 
-# Pwnagotchi BruteForcer
+<h1 align="center">Pwnagotchi BruteForcer</h1>
 
-> **Authorized-use only.** BruteForcer is intended for recovery tests, security assessments, and lab work involving Wi-Fi networks and captures you own or have explicit permission to test. Do not use it on networks or credentials you are not authorized to assess.
+<p align="center">
+  <strong>Turn a Pwnagotchi into a local Command Center for capture triage, queue control, throughput telemetry, and job history.</strong>
+</p>
 
-BruteForcer is a Pwnagotchi custom plugin that monitors a capture directory, processes WPA/WPA2 capture files with `aircrack-ng`, and provides a local, offline-friendly Command Center dashboard. Version 3.3.0 expands the original single-job workflow with capture intelligence, resource telemetry, fan status support, measured throughput reporting, queue controls, and a Mutator Lab.
+<p align="center">
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-3.3.0-65baff?style=for-the-badge" alt="Version 3.3.0"></a>
+  <img src="https://img.shields.io/badge/dashboard-port%205000-0b1724?style=for-the-badge&logo=flask&logoColor=white" alt="Dashboard port 5000">
+  <img src="https://img.shields.io/badge/platform-Pwnagotchi%20%2F%20Raspberry%20Pi-1a496b?style=for-the-badge" alt="Pwnagotchi Raspberry Pi">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-193b5c?style=for-the-badge" alt="GPL-3.0 license"></a>
+</p>
 
-## What v3.3.0 adds
+> **Authorized-use only.** This project is for recovery testing, security assessment, and lab work involving wireless networks and capture files you own or have explicit permission to assess. Do not use it on networks or credentials you are not authorized to test.
 
-- One-job-at-a-time processing with retry tracking and persistent job history.
-- Local Flask Command Center at `http://<pwnagotchi-ip>:5000/`.
-- Capture Library, Intelligence, Reports, and Mutator Lab pages.
-- Capture quality grades, duplicate grouping, preflight checks, queue explanations, and optional adaptive ordering.
-- Measured candidates-per-second telemetry based on tested-key counters and elapsed time, with unverified terminal text clearly labeled separately.
-- Resource history for temperature, RAM, swap, load, WPS, and an optional runtime governor.
-- Fan telemetry support: CPU temperature in Fahrenheit, PWM percent, and tachometer RPM when the companion fan plugin is installed.
-- Crash-aware active-job journal, export endpoints, per-SSID history, per-wordlist analytics, and dashboard queue actions.
-- Smart, capped candidate generation with an inspectable Mutator Lab and a Pi-friendly `800` candidate example budget.
+## Not another “set it and forget it” plugin
 
-## Dashboard pages
+BruteForcer gives a Pwnagotchi a real local control panel instead of leaving you with a pile of captures, terminal output, and guesswork.
 
-| Page | Purpose |
-|---|---|
-| `/` | Command Center: current job, queue, WPS, results, logs, system health, and fan telemetry. |
-| `/captures` | Searchable Capture Library with status, capture grade, duplicate grouping, priority, and requeue actions. |
-| `/intelligence` | Capture quality, queue reasoning, duplicate analysis, and resource trends. |
-| `/reports` | Daily and weekly activity summaries, wordlist effectiveness, and job outcomes. |
-| `/mutator` | Mutator strategy, cap usage, feature state, candidate-family mix, and recent build history. |
-| `/networks` | Per-SSID and wordlist performance history. |
-
-## Requirements
-
-- A supported Pwnagotchi image with custom-plugin loading enabled.
-- `aircrack-ng` installed on the Pwnagotchi.
-- Python 3, Flask, and the normal Pwnagotchi Python modules.
-- A configured capture directory and wordlist directory.
-- Optional: the companion fan plugin in `extras/fan_control_telemetry.py` plus `pigpiod` for PWM/RPM telemetry.
-
-## Install on the Pwnagotchi
-
-The device uses the filename **`Bruteforcer.py`** and the config prefix **`main.plugins.Bruteforcer.*`**. Keep that capitalization consistent.
-
-1. Back up the current plugin and stop Pwnagotchi:
-
-   ```bash
-   sudo systemctl stop pwnagotchi
-   sudo cp -a /usr/local/share/pwnagotchi/custom-plugins/Bruteforcer.py \
-     /usr/local/share/pwnagotchi/custom-plugins/Bruteforcer.py.backup-$(date +%Y%m%d-%H%M%S)
-   ```
-
-2. Copy or paste `Bruteforcer.py` to:
-
-   ```text
-   /usr/local/share/pwnagotchi/custom-plugins/Bruteforcer.py
-   ```
-
-3. Merge the relevant values from [`config.example.toml`](config.example.toml) into:
-
-   ```text
-   /etc/pwnagotchi/config.toml
-   ```
-
-   Do not add a second copy of an existing TOML key. Replace the existing setting instead.
-
-4. Verify syntax, then start the service:
-
-   ```bash
-   python3 -m py_compile /usr/local/share/pwnagotchi/custom-plugins/Bruteforcer.py
-   sudo systemctl start pwnagotchi
-   sudo systemctl status pwnagotchi --no-pager
-   ```
-
-No output from `py_compile` means the Python syntax check passed.
-
-For a detailed upgrade/rollback plan, read [`docs/UPGRADING.md`](docs/UPGRADING.md).
-
-## Configuration notes
-
-- `mutator_max_words = 800` is a practical starting point for a Pi-class device.
-- `smart` orders lower-noise candidate families early within the configured cap.
-- `adaptive_queue_enabled`, `dedupe_auto_skip`, and `epaper_status_mode` are off in the example so they do not unexpectedly change an established workflow.
-- The dashboard reads optional fan telemetry from `/var/tmp/pwnagotchi/fan_status.json`. Without the companion fan plugin it reports fan data as unavailable; the rest of BruteForcer still works.
-
-## Repository layout
+It watches your capture directory, processes one queued job at a time, records what happened, and puts the useful stuff on one dashboard:
 
 ```text
-Bruteforcer.py                    Main Pwnagotchi custom plugin
-config.example.toml               Merge-only configuration example
-CHANGELOG.md                      Release history
-extras/fan_control_telemetry.py   Optional fan telemetry companion
-docs/UPGRADING.md                 Device upgrade and rollback guide
-docs/GITHUB_UPDATE.md             Publishing the release to GitHub
+capture triage → queue decision → active job → measured performance → job history
 ```
 
-## Safety and data handling
+The Command Center is served locally at:
 
-- Treat capture files, progress JSON, reports, and dashboard exports as sensitive.
-- Use restrictive permissions and keep backups off-device where possible.
-- The dashboard can display operational metadata and should be kept on a trusted local network.
-- The plugin is designed for authorized testing only; you are responsible for ensuring your use complies with applicable law and your testing authorization.
+```text
+http://<your-pwnagotchi-ip>:5000/
+```
+
+No cloud dashboard. No account. No extra machine required for the local view.
+
+## Live snapshot
+
+The image at the top is a real Pi run. It shows the performance panel with processed captures, measured words per second, workload progress, and current job duration.
+
+The project also includes richer pages for queue control, capture triage, reporting, and Mutator Lab inspection.
+
+## Dashboard tour
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Command Center</h3>
+      <img src="assets/command-center-overview.svg" alt="Representative Command Center overview" width="100%">
+      <p>See the active job, queue, current throughput, system health, fan telemetry, progress history, and quick job actions without hunting through logs.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>Capture Library</h3>
+      <img src="assets/capture-library.svg" alt="Representative Capture Library page" width="100%">
+      <p>Grade captures, spot duplicates, understand queue priority, and decide whether to requeue, defer, review, or mark a bad capture.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Mutator Lab</h3>
+      <img src="assets/mutator-lab.svg" alt="Representative Mutator Lab page" width="100%">
+      <p>Inspect the active candidate budget, enabled features, candidate-family mix, recent builds, and estimated workload before it consumes Pi time.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>Built for the Pi you actually have</h3>
+      <p>BruteForcer keeps the workflow practical for a small Pwnagotchi build:</p>
+      <ul>
+        <li>One job at a time instead of competing processes.</li>
+        <li>Temperature, RAM, swap, load, and fan RPM visible in the same place.</li>
+        <li>Measured throughput instead of blindly trusting terminal redraw text.</li>
+        <li>Persistent state and job history so a reboot does not turn into a mystery.</li>
+      </ul>
+      <p><strong>It is meant to feel like a little appliance, not an unfinished script.</strong></p>
+    </td>
+  </tr>
+</table>
+
+> The Command Center layout and data can vary slightly by device, plugin options, and release version. The preview panels above reflect the features included in the v3.3.0 release.
+
+## What makes it different
+
+| Instead of... | You get... |
+|---|---|
+| A folder full of unknown `.pcap` files | Capture grades, duplicate grouping, queue reasons, and review actions |
+| A raw terminal counter you cannot fully trust | Measured WPS based on tested-key counters and elapsed time, with unverified terminal text called out separately |
+| Wondering whether the Pi is cooking itself | CPU temperature, RAM, swap, load, PWM fan percentage, and tachometer RPM in the dashboard |
+| Rerunning the same capture blindly | Persistent job history, capture status, retry tracking, and queue controls |
+| A giant mystery candidate list | A capped Mutator Lab with strategy, enabled features, candidate-family mix, build history, and estimated workload |
+| Losing context after a crash or reboot | An active-job journal and persistent state that help make interrupted work explainable |
+
+## Main features
+
+### Command Center
+
+- Local Flask dashboard on port `5000`
+- Active SSID, capture, wordlist stage, retry state, and progress
+- Queue controls: pause, resume, skip, defer, requeue, and mark a capture bad
+- Recent activity log and job timeline
+- Current, recent-average, and completed-job throughput metrics
+- Compact number display for high counters such as `249.3K` and `1.3M`
+
+### Capture Intelligence
+
+- Capture quality grades: `A`, `B`, `C`, `D`, and `X`
+- Plain-English reasons for grades and queue decisions
+- Duplicate grouping with best-capture selection
+- Pending, running, cracked, failed, timeout, deferred, bad, and review filters
+- Capture Library page at `/captures`
+- Intelligence page at `/intelligence`
+- Reports page at `/reports`
+
+### System awareness
+
+- CPU temperature in Fahrenheit
+- Free RAM, swap use, load average, and resource history
+- Optional runtime governor behavior
+- Fan telemetry with PWM percentage and tachometer RPM when the companion fan plugin is installed
+- Current health summary next to the workload instead of buried in system commands
+
+### Mutator Lab
+
+- Smart, capped candidate generation designed to keep the workload predictable on a Pi
+- Configurable strategy, candidate cap, years, token pairs, separators, numeric suffixes, and custom seed settings
+- Candidate-family breakdown and recent build history
+- Estimated pass duration based on measured device throughput
+- Full Mutator Lab page at `/mutator`
+
+### Reliability and reporting
+
+- One-job-at-a-time processing
+- Persistent progress and job history
+- Retry tracking and crash-aware active-job journal
+- Per-SSID history and per-wordlist analytics
+- Exportable results and reports
+- Optional companion fan telemetry plugin
+
+## Quick start
+
+1. Copy `Bruteforcer.py` to your Pwnagotchi custom plugin directory.
+2. Add the `main.plugins.Bruteforcer.*` options from [`config.example.toml`](config.example.toml) to `/etc/pwnagotchi/config.toml`.
+3. Restart Pwnagotchi.
+4. Open `http://<your-pwnagotchi-ip>:5000/`.
+
+The plugin filename and config prefix are intentionally case-sensitive:
+
+```toml
+main.plugins.Bruteforcer.enabled = true
+```
+
+Use the full device install and upgrade notes here:
+
+- [Install / upgrade guide](docs/UPGRADING.md)
+- [Verification checklist](docs/VERIFICATION.md)
+- [GitHub update notes](docs/GITHUB_UPDATE.md)
+- [Complete changelog](CHANGELOG.md)
+
+## Project layout
+
+```text
+Bruteforcer.py                    # Main custom plugin
+config.example.toml               # Example configuration
+assets/                           # README screenshots and dashboard previews
+docs/                             # Upgrade, verification, and GitHub notes
+extras/fan_control_telemetry.py  # Optional fan telemetry companion
+CHANGELOG.md                      # Release history
+```
+
+## Built for people who like seeing the whole system
+
+BruteForcer is for the Pwnagotchi builder who wants more than a status line:
+
+- See what is running now.
+- Know what is queued next and why.
+- See whether the device is staying healthy.
+- Understand what candidate generation is configured to do.
+- Keep a history that makes failures and results explainable.
+
+## Contributing and sharing
+
+Bug reports, improvement ideas, device screenshots, and tested configuration notes are welcome. The most useful contributions are real-world Pi results: performance, thermal behavior, dashboard screenshots, and compatibility notes from authorized lab environments.
+
+If this project is useful, star the repository and share it with the Pwnagotchi, Raspberry Pi, and responsible wireless-security communities.
 
 ## License
 
-GPL-3.0-or-later. See [`LICENSE`](LICENSE).
+This project is released under the [GNU General Public License v3.0](LICENSE).

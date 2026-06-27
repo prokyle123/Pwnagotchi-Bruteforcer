@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img" aria-labelledby="title desc">
+<title id="title">BruteForcer Command Center</title>
+<desc id="desc">Representative Command Center overview</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#07121f"/>
+    <stop offset="100%" stop-color="#0a1726"/>
+  </linearGradient>
+  <style>
+    .title { font: 700 32px 'Segoe UI', Arial, sans-serif; fill: #e8f3ff; letter-spacing: .5px; }
+    .sub { font: 500 17px 'Segoe UI', Arial, sans-serif; fill: #86a8c8; }
+    .eyebrow { font: 700 14px 'Courier New', monospace; fill:#6fb6ff; letter-spacing:1.2px; }
+    .value { font: 700 33px 'Courier New', monospace; fill:#eef6ff; }
+    .small { font: 500 15px 'Courier New', monospace; fill:#a7c8e6; }
+    .tiny { font: 500 13px 'Courier New', monospace; fill:#87a9ca; }
+    .card { fill:#091827; stroke:#15405f; stroke-width:1.5; }
+    .panel { fill:#071523; stroke:#1a496b; stroke-width:1.5; }
+    .divider { stroke:#1d4e72; stroke-width:1; stroke-dasharray:3 5; opacity:.9; }
+    .barbg { fill:#102338; }
+    .blue { fill:#65baff; }
+    .green { fill:#64df9a; }
+    .yellow { fill:#f7c550; }
+    .red { fill:#ff7581; }
+  </style>
+</defs>
+<rect width="1600" height="920" fill="url(#bg)"/>
+<rect x="0" y="0" width="1600" height="74" fill="#06101b"/>
+<text x="52" y="46" class="title">Pwnagotchi BruteForcer</text>
+<text x="422" y="45" class="sub">Command Center • local dashboard • port 5000</text>
+<rect x="1370" y="22" width="178" height="32" rx="16" fill="#0e2b42" stroke="#2b6792"/>
+<text x="1392" y="44" class="eyebrow">AUTHORIZED USE</text>
+
+<text x="52" y="116" class="eyebrow">COMMAND CENTER</text>
+<text x="52" y="155" class="title">A clear view of every job, queue decision, and system limit.</text>
+<text x="52" y="185" class="sub">Designed for low-power Pwnagotchi builds where every degree, MB, and second counts.</text>
+
+<g>
+  <rect x="52" y="224" width="360" height="160" rx="16" class="card"/>
+  <text x="78" y="258" class="eyebrow">CURRENT JOB</text>
+  <text x="78" y="304" class="value">STARLINK</text>
+  <text x="78" y="337" class="small">100kmost.txt:plain · 84%</text>
+  <rect x="78" y="352" width="298" height="10" rx="5" class="barbg"/>
+  <rect x="78" y="352" width="251" height="10" rx="5" class="blue"/>
+</g>
+<g>
+  <rect x="434" y="224" width="276" height="160" rx="16" class="card"/>
+  <text x="460" y="258" class="eyebrow">MEASURED WPS</text>
+  <text x="460" y="312" class="value">271</text>
+  <text x="460" y="342" class="small">counter / wall time</text>
+</g>
+<g>
+  <rect x="732" y="224" width="276" height="160" rx="16" class="card"/>
+  <text x="758" y="258" class="eyebrow">SYSTEM HEALTH</text>
+  <text x="758" y="306" class="value">140.2°F</text>
+  <text x="758" y="340" class="small">Fan 100% · 5410 RPM</text>
+</g>
+<g>
+  <rect x="1030" y="224" width="250" height="160" rx="16" class="card"/>
+  <text x="1056" y="258" class="eyebrow">QUEUE</text>
+  <text x="1056" y="312" class="value">287</text>
+  <text x="1056" y="342" class="small">captures tracked</text>
+</g>
+<g>
+  <rect x="1302" y="224" width="246" height="160" rx="16" class="card"/>
+  <text x="1328" y="258" class="eyebrow">RESULTS</text>
+  <text x="1328" y="312" class="value">1 / 0</text>
+  <text x="1328" y="342" class="small">failed / cracked</text>
+</g>
+
+<g>
+<rect x="52" y="416" width="910" height="432" rx="16" class="panel"/>
+<text x="78" y="452" class="eyebrow">PERFORMANCE SNAPSHOT</text>
+<text x="78" y="486" class="small">Words / second</text>
+<line x1="78" y1="716" x2="924" y2="716" stroke="#1d4e72"/>
+<polyline points="78,660 140,658 190,663 260,660 330,661 400,656 470,660 530,655 590,658 650,653 720,657 790,655 850,656 924,654" fill="none" stroke="#65baff" stroke-width="5"/>
+<text x="78" y="758" class="tiny">measured throughput stays visible without trusting raw terminal redraws</text>
+<rect x="78" y="788" width="145" height="32" rx="8" fill="#143e2d" stroke="#2f9f68"/>
+<text x="97" y="809" class="eyebrow">PAUSE QUEUE</text>
+<rect x="238" y="788" width="126" height="32" rx="8" fill="#12324d" stroke="#3682ba"/>
+<text x="261" y="809" class="eyebrow">REQUEUE</text>
+<rect x="379" y="788" width="160" height="32" rx="8" fill="#341a23" stroke="#a64a59"/>
+<text x="400" y="809" class="eyebrow">MARK CAPTURE BAD</text>
+</g>
+
+<g>
+<rect x="988" y="416" width="560" height="432" rx="16" class="panel"/>
+<text x="1014" y="452" class="eyebrow">QUEUE &amp; RECENT JOBS</text>
+<rect x="1014" y="478" width="508" height="78" rx="12" fill="#0c2032" stroke="#1b5275"/>
+<text x="1034" y="508" class="eyebrow">NOW · STARLINK</text>
+<text x="1034" y="534" class="small">STARLINK_2a7b9221678b.pcap · running</text>
+<text x="1451" y="510" class="tiny">1 / 3</text>
+<rect x="1014" y="574" width="508" height="64" rx="12" fill="#091827" stroke="#173e5c"/>
+<text x="1034" y="604" class="eyebrow">NEXT 1 · SKYNET</text>
+<text x="1034" y="626" class="small">queued · quality grade B</text>
+<rect x="1014" y="654" width="508" height="64" rx="12" fill="#091827" stroke="#173e5c"/>
+<text x="1034" y="684" class="eyebrow">NEXT 2 · LGWINDOW</text>
+<text x="1034" y="706" class="small">queued · duplicate review</text>
+<line x1="1014" y1="742" x2="1522" y2="742" class="divider"/>
+<text x="1014" y="775" class="small">local-first view · queue actions · job journal · health telemetry</text>
+</g>
+
+</svg>

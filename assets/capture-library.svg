@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img" aria-labelledby="title desc">
+<title id="title">BruteForcer Capture Library</title>
+<desc id="desc">Representative Capture Library page</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#07121f"/>
+    <stop offset="100%" stop-color="#0a1726"/>
+  </linearGradient>
+  <style>
+    .title { font: 700 32px 'Segoe UI', Arial, sans-serif; fill: #e8f3ff; letter-spacing: .5px; }
+    .sub { font: 500 17px 'Segoe UI', Arial, sans-serif; fill: #86a8c8; }
+    .eyebrow { font: 700 14px 'Courier New', monospace; fill:#6fb6ff; letter-spacing:1.2px; }
+    .value { font: 700 33px 'Courier New', monospace; fill:#eef6ff; }
+    .small { font: 500 15px 'Courier New', monospace; fill:#a7c8e6; }
+    .tiny { font: 500 13px 'Courier New', monospace; fill:#87a9ca; }
+    .card { fill:#091827; stroke:#15405f; stroke-width:1.5; }
+    .panel { fill:#071523; stroke:#1a496b; stroke-width:1.5; }
+    .divider { stroke:#1d4e72; stroke-width:1; stroke-dasharray:3 5; opacity:.9; }
+    .barbg { fill:#102338; }
+    .blue { fill:#65baff; }
+    .green { fill:#64df9a; }
+    .yellow { fill:#f7c550; }
+    .red { fill:#ff7581; }
+  </style>
+</defs>
+<rect width="1600" height="920" fill="url(#bg)"/>
+<rect x="0" y="0" width="1600" height="74" fill="#06101b"/>
+<text x="52" y="46" class="title">Pwnagotchi BruteForcer</text>
+<text x="422" y="45" class="sub">Command Center • local dashboard • port 5000</text>
+<rect x="1370" y="22" width="178" height="32" rx="16" fill="#0e2b42" stroke="#2b6792"/>
+<text x="1392" y="44" class="eyebrow">AUTHORIZED USE</text>
+
+<text x="52" y="116" class="eyebrow">CAPTURE LIBRARY</text>
+<text x="52" y="155" class="title">Triage the captures you have before wasting Pi time on them.</text>
+<text x="52" y="185" class="sub">Grades, duplicate grouping, status filters, and queue reasoning in one local page.</text>
+
+<g>
+<rect x="52" y="226" width="1496" height="90" rx="16" class="panel"/>
+<rect x="78" y="248" width="296" height="44" rx="10" fill="#0b2133" stroke="#235778"/>
+<text x="97" y="276" class="small">Search SSID or filename…</text>
+<rect x="402" y="248" width="110" height="44" rx="10" fill="#12324d" stroke="#3682ba"/>
+<text x="426" y="276" class="eyebrow">PENDING</text>
+<rect x="526" y="248" width="110" height="44" rx="10" fill="#091827" stroke="#1a496b"/>
+<text x="556" y="276" class="eyebrow">REVIEW</text>
+<rect x="650" y="248" width="124" height="44" rx="10" fill="#091827" stroke="#1a496b"/>
+<text x="677" y="276" class="eyebrow">DUPLICATES</text>
+<text x="1235" y="276" class="small">287 captures tracked</text>
+</g>
+
+<g>
+<rect x="52" y="348" width="1496" height="478" rx="16" class="panel"/>
+<text x="78" y="386" class="eyebrow">STATUS</text>
+<text x="228" y="386" class="eyebrow">CAPTURE</text>
+<text x="700" y="386" class="eyebrow">QUALITY</text>
+<text x="890" y="386" class="eyebrow">QUEUE REASON</text>
+<text x="1252" y="386" class="eyebrow">ACTION</text>
+<line x1="78" y1="405" x2="1522" y2="405" class="divider"/>
+<rect x="78" y="425" width="1444" height="80" rx="12" fill="#0c2032"/>
+<rect x="96" y="446" width="95" height="30" rx="15" fill="#153f2e"/><text x="119" y="467" class="eyebrow">READY</text>
+<text x="228" y="458" class="small">STARLINK_2a7b9221678b.pcap</text>
+<text x="228" y="482" class="tiny">SSID: STARLINK · detected EAPOL · latest capture</text>
+<rect x="700" y="440" width="50" height="40" rx="10" fill="#153f2e"/><text x="716" y="466" class="value">A</text>
+<text x="890" y="458" class="small">Clean capture · no duplicate match</text>
+<text x="890" y="482" class="tiny">priority: high · safe to queue</text>
+<rect x="1252" y="441" width="108" height="38" rx="9" fill="#12324d" stroke="#3682ba"/><text x="1274" y="466" class="eyebrow">REQUEUE</text>
+<rect x="1374" y="441" width="120" height="38" rx="9" fill="#341a23" stroke="#a64a59"/><text x="1393" y="466" class="eyebrow">MARK BAD</text>
+<line x1="78" y1="525" x2="1522" y2="525" class="divider"/>
+
+<rect x="78" y="545" width="1444" height="80" rx="12" fill="#091827"/>
+<rect x="96" y="566" width="95" height="30" rx="15" fill="#3f3416"/><text x="118" y="587" class="eyebrow">REVIEW</text>
+<text x="228" y="578" class="small">Skynet_74acb9ef7373.pcap</text>
+<text x="228" y="602" class="tiny">SSID: Skynet · capture appears incomplete</text>
+<rect x="700" y="560" width="50" height="40" rx="10" fill="#3f3416"/><text x="716" y="586" class="value">C</text>
+<text x="890" y="578" class="small">Needs inspection · partial metadata</text>
+<text x="890" y="602" class="tiny">priority: medium · defer recommended</text>
+<rect x="1252" y="561" width="108" height="38" rx="9" fill="#12324d" stroke="#3682ba"/><text x="1277" y="586" class="eyebrow">DEFER</text>
+<line x1="78" y1="645" x2="1522" y2="645" class="divider"/>
+
+<rect x="78" y="665" width="1444" height="80" rx="12" fill="#091827"/>
+<rect x="96" y="686" width="95" height="30" rx="15" fill="#421d26"/><text x="119" y="707" class="eyebrow">DUPLICATE</text>
+<text x="228" y="698" class="small">STARLINK_older_capture.pcap</text>
+<text x="228" y="722" class="tiny">SSID: STARLINK · matches a stronger capture</text>
+<rect x="700" y="680" width="50" height="40" rx="10" fill="#421d26"/><text x="716" y="706" class="value">X</text>
+<text x="890" y="698" class="small">Duplicate group: STARLINK</text>
+<text x="890" y="722" class="tiny">best capture already selected</text>
+<rect x="1252" y="681" width="242" height="38" rx="9" fill="#0c2032" stroke="#1a496b"/><text x="1274" y="706" class="eyebrow">VIEW BEST CAPTURE</text>
+</g>
+<text x="52" y="875" class="small">Less wasted compute. More confidence in what runs next.</text>
+
+</svg>
